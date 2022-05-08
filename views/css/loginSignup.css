@@ -357,6 +357,7 @@ html {
    overflow: hidden;
 }
 .materialContainer {
+   overflow-y: scroll;
    width: 100%;
    max-width: 460px;
    position: absolute;
@@ -376,6 +377,7 @@ html {
    list-style-type: none;
    outline: none;
 }
+
 *:after, *::before {
    -webkit-box-sizing: border-box;
    -moz-box-sizing: border-box;
@@ -385,4 +387,9 @@ html {
    text-decoration: none;
    list-style-type: none;
    outline: none;
+}
+
+.row {
+   display: grid;
+   grid-auto-flow: column;
 }
