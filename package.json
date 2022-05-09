@@ -17,8 +17,11 @@
   },
   "homepage": "https://github.com/Mayank-Maurya/DivPro#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
     "express": "^4.18.1",
-    "mongoose": "^6.3.2"
+    "mongoose": "^6.3.2",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"
