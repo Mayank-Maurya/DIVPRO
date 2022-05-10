@@ -40,15 +40,15 @@ global.session
 
 app.use('/auth',require('./routes/Auth'),()=>{console.log('auth hitted')})
 
-// app.get('/',(req,res)=>{
-//     console.log("dahsboard happened")
-//     session = req.session
-//     if(session.userid){
-//         //res.sendFile('UserDetaills.html', { root: publicdirectorypath })
-//     }
-//     //res.sendFile('LoginSignup.html',{ root: publicdirectorypath })
+app.get('/',(req,res)=>{
+    console.log("dahsboard happened")
+    session = req.session
+    if(session.userid){
+        res.sendFile('Dashboard.html', { root: publicdirectorypath })
+    }else
+     res.sendFile('LoginSignup.html',{ root: publicdirectorypath })
 
-// })
+})
 
 app.get('/login',(req,res)=>{
     
