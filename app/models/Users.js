@@ -19,23 +19,22 @@ const userSchema = new mongoose.Schema({
     },
     LeetcodeHandle:{
         type: String,
-        unique: true,
-        default:null
+        default: null
     },
     CodeForcesHandle:{
         type: String,
-        unique: true,
-        default:null
+        default: null
+
     },
     CodeChefHandle:{
         type: String,
-        unique: true,
-        default:null
+        default: null
+
     },
     GithubHandle:{
         type: String,
-        unique: true,
-        default:null
+        default: null
+
     }
     
 })
