@@ -17,6 +17,7 @@ const connectToMongoDB = async () =>{
         mongoose.connect(Credentials)
 
         console.log("DB is connected....")
+       
 
     } catch (err) {
 

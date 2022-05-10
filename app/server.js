@@ -5,6 +5,9 @@ const app=express()
 const server=http.createServer(app)
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
+const mongoose = require('mongoose')
+const MongoStore = require('connect-mongo');
+const User = require("./models/Users")
 
 const port=process.env.PORT || 5001;
 
@@ -13,13 +16,7 @@ const publicdirectorypath=path.join(__dirname,'../views')
 const oneDay = 1000 * 60 * 60 * 24;
 
 //session middleware
-app.use(sessions({
-    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-    saveUninitialized:true,
-    cookie: { maxAge: oneDay },
-    resave: false
-}));
-
+global.tempUID = 0
 
 
 app.use(cookieParser());
@@ -27,33 +24,50 @@ app.use(express.static(publicdirectorypath))
 app.use(express.json({extended: false}))
 app.use(express.urlencoded({extended: false}))
 
-global.session
 
  /*__getting db connection from db.js__*/
 
-
-
  const connectToDB = require("./config/db");
+
  /*___connecting DB_____*/
  connectToDB();
+
+ app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false,
+    store: MongoStore.create({mongoUrl: mongoose.connection._connectionString})
+}));
+
 
 
 app.use('/auth',require('./routes/Auth'),()=>{console.log('auth hitted')})
 
-app.get('/',(req,res)=>{
-    console.log("dahsboard happened")
-    session = req.session
-    if(session.userid){
-        res.sendFile('Dashboard.html', { root: publicdirectorypath })
-    }else
-     res.sendFile('LoginSignup.html',{ root: publicdirectorypath })
-
+app.get('/',async (req,res)=>{
+    console.log(req.session)
+    let user = await User.findOne({username: req.session.userid})
+    console.log(user)
+    if(user.LeetcodeHandle || user.CodeChefHandle || user.CodeForcesHandle || user.GithubHandle)
+    {
+        if(req.session.user){
+            res.sendFile('Dashboard.html', { root: publicdirectorypath })
+        }else
+         res.sendFile('LoginSignup.html',{ root: publicdirectorypath })
+    }else{
+        res.sendFile('UserDetaills.html',{ root: publicdirectorypath })
+    }
+    
 })
 
 app.get('/login',(req,res)=>{
-    
+    console.log(req.session.userid)
+    if(req.session.userid)
+        res.redirect('/')
+    else
     res.sendFile('LoginSignup.html', { root: publicdirectorypath })
 })
+
 
 
 

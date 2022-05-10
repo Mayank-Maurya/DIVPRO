@@ -3,6 +3,9 @@ const { request } = require("express")
 const bcrypt = require("bcryptjs")
 const User = require("../models/Users")
 const jwt = require("jsonwebtoken")
+const path  = require('path')
+
+const publicdirectorypath=path.join(__dirname,'../../views')
 
 exports.register = async (request, response) => {
     
@@ -45,7 +48,7 @@ exports.register = async (request, response) => {
 /*_____login functionality is below_____*/
 
 exports.login = async (request, response) => {
-    console.log("login happened")
+    
     //validating
     
     console.log(request.body)
@@ -53,6 +56,8 @@ exports.login = async (request, response) => {
     const { username, password } = request.body
 
     try {
+
+
         //console.log(email+" "+password);
         const user = await User.findOne({UserName: username.toLowerCase()})
 
@@ -67,32 +72,74 @@ exports.login = async (request, response) => {
         if(!checkPassword)
         return response.status(422).send("invalid creds")
 
+        
+            request.session.user = {
+                uuid: global.tempUID
+            }
+            global.tempUID = global.tempUID + 1
+    
+            request.session.save(err=>{
+                if(err)
+                {
+                    console.log("error occured in sessions")
+                }else{
+                    response.status(200)
+                    .redirect("/")
+                }
+            })
+        
 
-        global.session=request.session;
-    global.session.userid=request.body.username;
+        console.log("login happened")
         //account is good to go
 
-        const payload = {
-            user: {
-                id: user._id,
-                username: user.username,
-                email: user.email
-            }
-        }
+        // const payload = {
+        //     user: {
+        //         id: user._id,
+        //         username: user.username,
+        //         email: user.email
+        //     }
+        // }
 
-        jwt.sign(
-            payload,
-            "jwtkey",
-            {expiresIn: 3600},
-            (err,token) => {
-                if(err) throw err
+        // jwt.sign(
+        //     payload,
+        //     "jwtkey",
+        //     {expiresIn: 3600},
+        //     (err,token) => {
+        //         if(err) throw err
 
-                response.status(200)
-                .redirect("/")
+                
 
-            }
-        )
+        //     }
+        // )
     
+
+    } catch (err) {
+        console.log(err.message)
+        response.status(500).sendStatus(response.statusCode)
+    }
+}
+
+
+//update
+exports.update = async (request, response) => {
+    
+    //validating
+    
+    console.log(request.body)
+
+    const { LeetCodeHandle, CodeChefHandle, CodeForcesHandle, GithubHandle } = request.body
+
+    try {
+        //console.log(email+" "+password);
+       const user = await User.findOneAndUpdate({UserName: request.session.userid},{LeetcodeHandle: LeetCodeHandle, CodeChefHandle: CodeChefHandle
+        , CodeForcesHandle: CodeForcesHandle, GithubHandle: GithubHandle})
+
+        //check whether it exists or not
+        if(!user) 
+           return response.status(422).send("Something went wrong")
+
+           response.redirect('/')
+        
 
     } catch (err) {
         console.log(err.message)

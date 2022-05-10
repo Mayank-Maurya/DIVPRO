@@ -13,13 +13,13 @@
     <div class="materialContainer" >
         <div class="box" >
 
-            <div class="title" style="text-align:center;padding: 2%;">Details</div>
+            <!-- <div class="title" style="text-align:center;padding: 2%;">Details</div> -->
      
-            <div class="input">
+            <!-- <div class="input">
                 <label for="email">Email</label>
                 <input type="text" name="email" id="email">
                 <span class="spin"></span>
-             </div>
+             </div> -->
 
              <div style="padding:2%; content-visibility: hidden;">
                 <h1>news</h1>
@@ -27,21 +27,22 @@
      
         <div class="title" style="text-align:center;">Programmer</div>
      
+        <form action="/auth/update" method="post">
              <div class="input">
                 <label for="cc">CodeChef</label>
-                <input type="text" name="cc" id="cc">
+                <input type="text" name="CodeChefHandle" id="cc">
                 <span class="spin"></span>
              </div>
   
              <div class="input">
               <label for="cf">Codeforces</label>
-              <input type="text" name="cf" id="cf">
+              <input type="text" name="CodeForcesHandle" id="cf">
               <span class="spin"></span>
            </div>
   
            <div class="input">
               <label for="lc">Leetcode</label>
-              <input type="text" name="lc" id="lc">
+              <input type="text" name="LeetCodeHandle" id="lc">
               <span class="spin"></span>
            </div>
 
@@ -55,13 +56,15 @@
      
         <div class="input">
             <label for="git">Github</label>
-            <input type="text" name="git" id="git">
+            <input type="text" name="GithubHandle" id="git">
             <span class="spin"></span>
          </div>
 
          <div class="button login">
-            <button><span>GO</span> <i class="fa fa-check"></i></button>
+            <button><span>UPDATE</span> <i class="fa fa-check"></i></button>
          </div>
+
+      </form>
 
      
         </div>
