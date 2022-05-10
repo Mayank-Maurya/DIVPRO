@@ -45,12 +45,18 @@ app.use(express.urlencoded({extended: false}))
 app.use('/auth',require('./routes/Auth'),()=>{console.log('auth hitted')})
 
 app.get('/',async (req,res)=>{
+    console.log(req.query.username)
     console.log(req.session)
+    
     let user = await User.findOne({username: req.session.userid})
     console.log(user)
     if(user.LeetcodeHandle || user.CodeChefHandle || user.CodeForcesHandle || user.GithubHandle)
     {
         if(req.session.user){
+            if(!req.query.username)
+            {
+                res.redirect("/"+"?username="+req.session.userid)
+            }else
             res.sendFile('Dashboard.html', { root: publicdirectorypath })
         }else
          res.sendFile('LoginSignup.html',{ root: publicdirectorypath })
@@ -60,10 +66,11 @@ app.get('/',async (req,res)=>{
     
 })
 
+
 app.get('/login',(req,res)=>{
     console.log(req.session.userid)
     if(req.session.userid)
-        res.redirect('/')
+        res.redirect("/"+"?username="+req.session.userid)
     else
     res.sendFile('LoginSignup.html', { root: publicdirectorypath })
 })

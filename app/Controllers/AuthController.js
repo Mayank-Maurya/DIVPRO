@@ -84,7 +84,7 @@ exports.login = async (request, response) => {
                     console.log("error occured in sessions")
                 }else{
                     response.status(200)
-                    .redirect("/")
+                    .redirect("/"+"?username="+user.username)
                 }
             })
         
@@ -138,7 +138,7 @@ exports.update = async (request, response) => {
         if(!user) 
            return response.status(422).send("Something went wrong")
 
-           response.redirect('/')
+           response.redirect("/"+"?username="+user.username)
         
 
     } catch (err) {
