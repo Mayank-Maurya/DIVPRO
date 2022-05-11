@@ -51,7 +51,6 @@ exports.login = async (request, response) => {
     
     //validating
     
-    console.log(request.body)
 
     const { username, password } = request.body
 
@@ -71,20 +70,17 @@ exports.login = async (request, response) => {
         //check whether password correct or not
         if(!checkPassword)
         return response.status(422).send("invalid creds")
-
-        
-            request.session.user = {
-                uuid: global.tempUID
-            }
-            global.tempUID = global.tempUID + 1
     
+        request.session.user = username
+        console.log("login: "+request.session)
             request.session.save(err=>{
                 if(err)
                 {
                     console.log("error occured in sessions")
                 }else{
+                    console.log("/"+"?username="+username)
                     response.status(200)
-                    .redirect("/"+"?username="+user.username)
+                    .redirect("/"+"?username="+username)
                 }
             })
         

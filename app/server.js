@@ -48,14 +48,14 @@ app.get('/',async (req,res)=>{
     console.log(req.query.username)
     console.log(req.session)
     
-    let user = await User.findOne({username: req.session.userid})
+    let user = await User.findOne({username: req.session.user})
     console.log(user)
     if(user.LeetcodeHandle || user.CodeChefHandle || user.CodeForcesHandle || user.GithubHandle)
     {
         if(req.session.user){
             if(!req.query.username)
             {
-                res.redirect("/"+"?username="+req.session.userid)
+                res.redirect("/"+"?username="+req.session.user)
             }else
             res.sendFile('Dashboard.html', { root: publicdirectorypath })
         }else
@@ -66,13 +66,20 @@ app.get('/',async (req,res)=>{
     
 })
 
+app.get('/logout',async (req,res)=>{
+    req.session.destroy((err)=>{
+        if(!err){
+            res.redirect('/login')
+        }
+    })
+})
 
-app.get('/login',(req,res)=>{
-    console.log(req.session.userid)
-    if(req.session.userid)
-        res.redirect("/"+"?username="+req.session.userid)
+app.get('/login',async (req,res)=>{
+    console.log(req.session.user)
+    if(req.session.user)
+       await res.redirect("/"+"?username="+req.session.user)
     else
-    res.sendFile('LoginSignup.html', { root: publicdirectorypath })
+   await res.sendFile('LoginSignup.html', { root: publicdirectorypath })
 })
 
 
