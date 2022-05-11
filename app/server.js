@@ -44,6 +44,14 @@ app.use(express.urlencoded({extended: false}))
 
 app.use('/auth',require('./routes/Auth'),()=>{console.log('auth hitted')})
 
+app.get('/user' , async (req,res)=>{
+    console.log(req.query.username)
+    var user = await User.findOne({UserName: req.query.username})
+    user.password = "";
+    console.log(user)
+    res.send(user)
+})
+
 app.get('/',async (req,res)=>{
     console.log(req.query.username)
     console.log("in dashboard: "+req.session.user)
