@@ -46,9 +46,9 @@ app.use('/auth',require('./routes/Auth'),()=>{console.log('auth hitted')})
 
 app.get('/',async (req,res)=>{
     console.log(req.query.username)
-    console.log(req.session)
+    console.log("in dashboard: "+req.session.user)
     
-    let user = await User.findOne({username: req.session.user})
+    let user = await User.findOne({UserName: req.session.user})
     console.log(user)
     if(user.LeetcodeHandle || user.CodeChefHandle || user.CodeForcesHandle || user.GithubHandle)
     {

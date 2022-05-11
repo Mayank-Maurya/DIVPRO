@@ -73,7 +73,7 @@ exports.login = async (request, response) => {
     
         request.session.user = username
         console.log("login: "+request.session)
-            request.session.save(err=>{
+         await request.session.save(err=>{
                 if(err)
                 {
                     console.log("error occured in sessions")
@@ -127,14 +127,15 @@ exports.update = async (request, response) => {
 
     try {
         //console.log(email+" "+password);
-       const user = await User.findOneAndUpdate({UserName: request.session.userid},{LeetcodeHandle: LeetCodeHandle, CodeChefHandle: CodeChefHandle
+       const user = await User.findOneAndUpdate({UserName: request.session.user},{LeetcodeHandle: LeetCodeHandle, CodeChefHandle: CodeChefHandle
         , CodeForcesHandle: CodeForcesHandle, GithubHandle: GithubHandle})
 
+        console.log(user)
         //check whether it exists or not
         if(!user) 
            return response.status(422).send("Something went wrong")
 
-           response.redirect("/"+"?username="+user.username)
+           response.redirect("/"+"?username="+user.UserName)
         
 
     } catch (err) {
