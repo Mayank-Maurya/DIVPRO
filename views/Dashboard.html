@@ -5,81 +5,65 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HomePage</title>
-</head>
-<h1>DashBoard</h1>
-</head>
-<body>
-    
-</body>
-</html>
-    <meta name="viewport" content="width=device-width" />
-    <title>HTML Result</title>
-    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" 
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link href="css/jquery.json-viewer.css" rel="stylesheet">
 
 </head>
-<body>
+<body style="background-color: black;background-position: center;background-size: cover;background-repeat: no-repeat;min-height: 100vh;font-family: 'Roboto' sans-serif;overflow: hidden;">
 
-
-
-    <main class="container" >
+    <div class="container" >
         <div class="bg-light p-5 rounded mt-3">
-            <img style="border-radius:50%;float: right;width: 12%;
+            <!-- <img style="border-radius:50%;float: right;width: 12%;
             height:12%; float:top;"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2VYOPtQquXFlXy_7mMgcJKd6iRm15iYcHUsmLXu_0htPG3QQtDIF57mZf8Kcguscs3B4&usqp=CAU" alt="Avatar">
-        
+         -->
           <h1>About me</h1>
           <p class="lead">About me my short bio</p>
-        </div>
-        <div class="container" style="padding: 2%;">
-            <div class="row">
-              <div class="col">
-                <button type="button" class="btn btn-light">Light</button>
+
+          <div class="container body-content" style="padding-top: 1%;" >
+              <div class="container-fluid d-flex justify-content-between">
+                <h1 id="submitData" type="button" class="btn btn-dark">Submit</h1>
+                <h1 id="editData" type="button" class="btn btn-dark">Edit</h1>
+                <h1 id="logoutData" type="button" class="btn btn-dark">logout</h1>
               </div>
-              <div class="col">
-                <button type="button" class="btn btn-dark">Dark</button>
-              </div>
-              <div class="col">
-                <button type="button" class="btn btn-light">Light</button>
-              </div>
-              <div class="col">
-                <button type="button" class="btn btn-dark">Dark</button>
-              </div>
-              <div class="col">
-                <button type="button" class="btn btn-light">Light</button>
-              </div>
-              <div class="col">
-                <button type="button" class="btn btn-dark">Dark</button>
-              </div>
-            </div>
           </div>
-      </main>
-
-    <div class="container body-content">
-        <div class="container" style="align-content: center;">
-
-
-            <div class="row justify-content-start" style="padding-top:10px;">
-
-                <div class="col" style="padding-top:10px;text-align: center;">
-                    <img alt="Image html" width="80%" height="60%" style="max-height:500px;max-width:500px;" src="https://cdn3.iconfinder.com/data/icons/web-and-seo-11-1/65/549-512.png" />
-                    <span class="badge bg-light text-dark" style="font-size: 50px;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-fullscreen-xl">PROGRAMMER
-                    </span>
-                </div>
-
-                <div class="col" style="padding-top:10px;text-align: center;">
-                    <img alt="Image html" width="80%" height="60%" style="max-height:500px;max-width:500px;" src="https://img.favpng.com/7/16/22/programmer-computer-programming-computer-software-computer-icons-programming-language-png-favpng-nQrswvgdaKr9WK33JJEUZiidU.jpg" />
-                    <span class="badge bg-dark text-light" style="font-size: 50px;">DEVELOPER</span>
-                </div>
-            </div>
 
         </div>
+        
+      
+      </div>
+
+    <div class="container body-content" style="padding:2%">
+        <div class="container" style="align-content: center;">
+          <div class="container-fluid d-flex justify-content-around">
+            <h1 id="CODECHEF" type="button" class="btn btn-primary">CODECHEF</h1>
+            <h1 id="CODEFORCES" class="btn btn-secondary">CODEFORCES</h1>
+            <h1 id="LEETCODE" class="btn btn-success">LEETCODE</h1>
+            <h1 id="GITHUB" class="btn btn-danger">GITHUB</h1>
+          </div>
+        </div>
+      </div>
 
 
-</div>
+    <div class="container body-content" style="
+    width:1000px;
+    overflow-y: auto;">
+      <div class="container" style="align-content: center;">
+        <div id="Response" class="my-3">
+          <div class="form-group row ">
+             <div class="col-sm-12">
+                  <!-- <textarea  id="result" rows="3" style="background-color:black;color:whitesmoke"></textarea> -->
+                  <div class="form-control" id="json-renderer" style="height: auto;width: auto;overflow-y: auto; max-height: 400px;">Response text area</div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
 
 </body>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="js/jquery.json-viewer.js"></script>
+<script src="js/index.js"></script>
    
 </html>
