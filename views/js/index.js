@@ -15,6 +15,7 @@ let LEETCODE=document.getElementById('LEETCODE');
 let GITHUB=document.getElementById('GITHUB');
 let CODEFORCES=document.getElementById('CODEFORCES');
 let name=document.getElementById('name');
+let Logout=document.getElementById('logoutData');
 
 
 $(window).on('load', function() {
@@ -163,5 +164,11 @@ GITHUB.addEventListener('click',()=>{
     })
 })
 
+Logout.addEventListener('click',()=>{
+    let baseurl = "http://localhost:5001/logout";
+    fetch(baseurl).then(data=>{
+        window.location.href = "LoginSignup.html";
+    })
+})
 
 
