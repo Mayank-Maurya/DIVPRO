@@ -16,6 +16,7 @@ let GITHUB=document.getElementById('GITHUB');
 let CODEFORCES=document.getElementById('CODEFORCES');
 let name=document.getElementById('name');
 let Logout=document.getElementById('logoutData');
+let editDetail=document.getElementById('editData');
 
 
 $(window).on('load', function() {
@@ -171,4 +172,7 @@ Logout.addEventListener('click',()=>{
     })
 })
 
+editDetail.addEventListener('click',()=>{
+    window.location.href = "UserDetaills.html";
+})
 
