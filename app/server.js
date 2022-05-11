@@ -52,6 +52,20 @@ app.get('/user' , async (req,res)=>{
     res.send(user)
 })
 
+app.post('/submit',async (req,res)=>{
+    if(req.session.user)
+    {
+        const { bio , username } = req.body
+        let user = await User.findOneAndUpdate({UserName: username},{bio: bio})
+        if(!user) 
+           return response.status(422).send("Something went wrong")
+        res.status(200).send("Updated")
+
+    }else{
+        res.redirect('/login')
+    }
+})
+
 app.get('/',async (req,res)=>{
     console.log(req.query.username)
     console.log("in dashboard: "+req.session.user)
