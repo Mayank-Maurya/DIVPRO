@@ -123,10 +123,25 @@ exports.update = async (request, response) => {
     
     console.log(request.body)
 
-    const { LeetCodeHandle, CodeChefHandle, CodeForcesHandle, GithubHandle } = request.body
+    let { LeetCodeHandle, CodeChefHandle, CodeForcesHandle, GithubHandle } = request.body
 
     try {
         //console.log(email+" "+password);
+        let tempUser = await User.findOne({UserName: request.session.user})
+
+        if(LeetCodeHandle==='' || LeetCodeHandle===null){
+            LeetCodeHandle = tempUser.LeetCodeHandle
+        }
+        if(CodeChefHandle==='' || CodeChefHandle===null){
+            CodeChefHandle = tempUser.CodeChefHandle
+        }
+        if(CodeForcesHandle==='' || CodeForcesHandle===null){
+            CodeForcesHandle = tempUser.CodeForcesHandle
+        }
+        if(GithubHandle==='' || GithubHandle===null){
+            GithubHandle = tempUser.GithubHandle
+        }
+
        const user = await User.findOneAndUpdate({UserName: request.session.user},{LeetcodeHandle: LeetCodeHandle, CodeChefHandle: CodeChefHandle
         , CodeForcesHandle: CodeForcesHandle, GithubHandle: GithubHandle})
 
