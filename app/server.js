@@ -69,7 +69,8 @@ app.post('/submit',async (req,res)=>{
 app.get('/',async (req,res)=>{
     console.log(req.query.username)
     console.log("in dashboard: "+req.session.user)
-    
+    try{
+        if(req.session.user){
     let user = await User.findOne({UserName: req.session.user})
     console.log(user)
     if(user.LeetcodeHandle || user.CodeChefHandle || user.CodeForcesHandle || user.GithubHandle)
@@ -85,6 +86,13 @@ app.get('/',async (req,res)=>{
     }else{
         res.sendFile('UserDetaills.html',{ root: publicdirectorypath })
     }
+}else {
+    res.redirect('/login')
+}
+}catch(err)
+{
+    console.log(err)
+}
     
 })
 
